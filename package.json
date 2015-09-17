@@ -1,0 +1,16 @@
+{
+"name": "google-news",
+"description": "google news",
+"version": "0.0.1",
+"private": true,
+
+"dependencies": {
+    "express": "4.9.5",
+    "ejs": "1.0.0",
+    
+    "serve-index": "1.4.0",
+    "serve-static": "1.6.3",
+    "socket.io": "1.1.0",
+    "request": "2.45.0"
+    }
+}

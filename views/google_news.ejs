@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>google news</title>
+        <link  href="css/style.css" type="text/css" rel="stylesheet" />
+        <style>
+            /*
+            * { background-color: rgba(255,0,0,.2); }
+            * * { background-color: rgba(0,255,0,.2); }
+            * * * { background-color: rgba(0,0,255,.2); }
+            * * * * { background-color: rgba(255,0,255,.2); }
+            * * * * * { background-color: rgba(0,255,255,.2); }
+            * * * * * * { background-color: rgba(255,255,0,.2); }
+            
+            * * * * * * * { background-color: rgba(255,0,0,.2); }
+            * * * * * * * * { background-color: rgba(0,255,0,.2); }
+            * * * * * * * * * { background-color: rgba(0,0,255,.2); }
+            * * * * * * * * * * { background-color: rgba(255,0,255,.2); }
+            * * * * * * * * * * * { background-color: rgba(0,255,255,.2); }
+            * * * * * * * * * * * * { background-color: rgba(255,255,0,.2); }
+            
+            * * * * * * * * * * * * * { background-color: rgba(255,0,0,.2); }
+            * * * * * * * * * * * * * * { background-color: rgba(0,255,0,.2); }
+            * * * * * * * * * * * * * * * { background-color: rgba(0,0,255,.2); }
+            */
+        </style>
+    </head>
+    <body>
+        <p class="loading_page">loading...</p>
+        
+        <div id="app">
+            <div class="container" ng-controller="main_controller as main" >
+                
+                <div ui-view></div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4><%= message %> <small style="float: right;"><a href="http://catalinenache.com/___share/google_news/" target="_blank">download me</a></small></h4></div>
+                    <div class="panel-body row">
+                      <div class="form-group "> <!-- has-feedback -->
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" placeholder="search for news" ng-model-onblur ng-model="main.q" />
+                                <!--<span class="glyphicon glyphicon-search form-control-feedback"></span>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <ul ng-show="main.news.length" class="pagination" >
+                            <li ng-class="{active:main.cursor.currentPageIndex+1 == page.label}" ng-repeat="page in main.cursor.pages"><a href="#" onclick="return false;" ng-click="main.navigate_to(page.start)">{{page.label}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-12">
+                        <accordion close-others="true">
+                            <accordion-group  ng-repeat="topic in main.news" is-open="topic.status.isFirstOpen" ng-click="topic.status.isFirstOpen = !topic.status.isFirstOpen" > 
+                                <accordion-heading >
+                                    <p class="clickable"  ng-click="main.set_focus($index)" ng-bind-html="[($index+1+main.cursor.currentPageIndex*4)] + ' - ' + topic.title"></p>
+                                </accordion-heading>
+                                <div  ng-bind-html="topic.content"></div>
+                                <div><b>publisher: </b><span ng-bind-html="topic.publisher"></span></div>
+                                <div style="overflow: hidden;"><b>source: </b><a target="_blank" ng-href="{{topic.unescapedUrl}}">{{topic.unescapedUrl}}</a></div> 
+                                <div><b>published on: </b><span ng-bind-html="topic.publishedDate"></span></div> 
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src='/socket.io/socket.io.js'></script>
+    <script type="text/javascript" src="libs/jquery-1.11.1/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="libs/angular-1.2.26/angular.js"></script>
+    <script type="text/javascript" src="libs/ui-router-0.2.11/angular-ui-router.js"></script>
+    <script type="text/javascript" src="libs/ui-bootstrap-0.11.2/ui-bootstrap-tpls-0.11.2.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap-3.2.0/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/app/app.js"></script>
+    <script type="text/javascript" src="js/app/controllers.js"></script>
+    <script type="text/javascript" src="js/app/services.js"></script>
+    <script type="text/javascript" src="js/app/directives.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</html>
