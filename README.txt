@@ -10,23 +10,3 @@
 7. open browser and navigate to http://localhost:31955
 
 
-
-Note:
-
-The application is also running for a while at: 
-http://catalin78.webfactional.com/
-
-and can be downloaded at:
-http://catalinenache.com/___share/google_news/
-(right click, save as)
-
-
-
-Random remarks:
-
-all javascript requirments in main page
-might be concatenated and minimised using "browserify" node module.
-
-the application may be further polished
-
-
